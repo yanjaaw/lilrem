@@ -30,7 +30,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.body.setOffset(7, 16);
         this.body.setCircle(3);
 
-        this.keys = scene.input.keyboard.addKeys('W,S,A,D,UP,LEFT,RIGHT,DOWN,SPACE');
+        this.keys = scene.input.keyboard.addKeys('W,S,A,D,E,C,UP,LEFT,RIGHT,DOWN,SPACE');
 
         this.lastAnim = null;﻿
         this.vel = 200;
@@ -39,7 +39,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         config = {
             key: 'stand-down',
-            frames: scene.anims.generateFrameNumbers('player', {start: 0, end: 0}),
+            frames: scene.anims.generateFrameNumbers('player', {start: 2, end: 2}),
             frameRate: 15,
             repeat: -1
         };
@@ -47,7 +47,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         config = {
             key: 'stand-right',
-            frames: scene.anims.generateFrameNumbers('player', {start: 4, end: 4}),
+            frames: scene.anims.generateFrameNumbers('player', {start: 1, end: 1}),
             frameRate: 15,
             repeat: -1
         };
@@ -55,7 +55,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         config = {
             key: 'stand-up',
-            frames: scene.anims.generateFrameNumbers('player', {start: 8, end: 8}),
+            frames: scene.anims.generateFrameNumbers('player', {start: 6, end: 6}),
             frameRate: 15,
             repeat: -1
         };
@@ -64,7 +64,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         var config = {
             key: 'walk-down',
-            frames: scene.anims.generateFrameNumbers('player', {start: 0, end: 3}),
+            frames: scene.anims.generateFrameNumbers('player', {start: 2, end: 2}),
             frameRate: 15,
             repeat: -1
         };
@@ -72,7 +72,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         var config = {
             key: 'walk-right',
-            frames: scene.anims.generateFrameNumbers('player', {start: 4, end: 7}),
+            frames: scene.anims.generateFrameNumbers('player', {start: 4, end: 3}),
             frameRate: 15,
             repeat: -1
         };
@@ -80,7 +80,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         var config = {
             key: 'walk-up',
-            frames: scene.anims.generateFrameNumbers('player', {start: 8, end: 11}),
+            frames: scene.anims.generateFrameNumbers('player', {start: 6, end: 6}),
             frameRate: 15,
             repeat: -1
         };
@@ -106,10 +106,16 @@ class Player extends Phaser.GameObjects.Sprite {
         animationName ﻿= 'stand-' + currentDirection;
 
         // all the ways the player can move.
-        let left  = this.keys.A.isDown || this.keys.LEFT.isDown  || this.scene.gamepad && this.scene.gamepad.left;
-        let right = this.keys.D.isDown || this.keys.RIGHT.isDown || this.scene.gamepad && this.scene.gamepad.right;
-        let up    = this.keys.W.isDown || this.keys.UP.isDown    || this.scene.gamepad && this.scene.gamepad.up;
-        let down  = this.keys.S.isDown || this.keys.DOWN.isDown  || this.scene.gamepad && this.scene.gamepad.down;
+        let left  = this.keys.A.isDown || this.scene.gamepad && this.scene.gamepad.left;
+        let right = this.keys.D.isDown || this.scene.gamepad && this.scene.gamepad.right;
+        let up    = this.keys.W.isDown || this.scene.gamepad && this.scene.gamepad.up;
+        let down  = this.keys.S.isDown || this.scene.gamepad && this.scene.gamepad.down;
+        let bomb  = this.keys.E.isDown;
+        let flash  = this.keys.C.isDown;
+        let leftFire = this.keys.LEFT.isDown;
+        let rightFire = this.keys.RIGHT.isDown;
+        let upFire = this.keys.UP.isDown;
+        let downFire = this.keys.DOWN.isDown;
 
         if (this.canMove) {
             // moving
@@ -134,6 +140,34 @@ class Player extends Phaser.GameObjects.Sprite {
                 this.body.setVelocityY(this.vel);
                 animationName = 'walk-down';
             }
+            if (bomb) {
+                this.scene.cameras.main.shake(2500, 0.001, true);
+            }
+            if (flash) {
+                this.scene.cameras.main.flash(1000)
+            }
+
+            if (leftFire) {
+                this.direction = 'left'
+                animationName = "walk-right";
+                this.setFlipX(true);
+            }
+
+            if (rightFire) {
+                this.direction = 'right'
+                animationName = "walk-right";
+                this.setFlipX(false);
+            }
+
+            if (upFire) {
+                this.direction = 'up'
+                animationName = "walk-up";
+            }
+
+            if (downFire) {
+                this.direction = 'left'
+                animationName = "walk-down";
+            }
 
             if(this.lastAnim !== animationName) {
                 this.lastAnim = animationName;
@@ -149,7 +183,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.vel = 200;
         }
 
-        // diagnoal movement
+        // diagonal movement
         this.body.velocity.normalize().scale(this.vel);
 
         // Check for room change.

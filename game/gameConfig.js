@@ -1,9 +1,9 @@
 // I like to know my options (https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig).
 const config = {
 
-    title: 'this game -',           // The title of the game. Shown in the browser console.
+    title: `Lil' Rem -`,           // The title of the game. Shown in the browser console.
 
-    url: 'http://geekwagon.net',    // The URL of the game. Shown in the browser console.
+    url: 'http://yanjaa.com',    // The URL of the game. Shown in the browser console.
 
     version: 'ery early version',   // The version of the game. Shown in the browser console.
 
