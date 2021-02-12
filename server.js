@@ -12,7 +12,7 @@ app.listen( app.get( 'port' ), function() {
   console.log( 'Node server is running on port ' + app.get( 'port' ));
   });
 
-app.use(express.static('index-page'));
+app.use('/static', express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
