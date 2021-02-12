@@ -1,0 +1,27 @@
+{
+  "name": "room3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanjaaw/lilrem.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yanjaaw/lilrem/issues"
+  },
+  "homepage": "https://github.com/yanjaaw/lilrem#readme",
+  "devDependencies": {
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "phaser": "^3.23.0"
+  }
+}
