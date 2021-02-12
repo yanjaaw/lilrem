@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yanjaaw/lilrem.git"
   },
-  "author": "",
+  "author": "Yanjaa",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yanjaaw/lilrem/issues"
